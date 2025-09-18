@@ -1,0 +1,916 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#4fd1c5">
+    <meta name="description" content="شركة سومر - منصات وأدوات أكاديمية مبتكرة للطلاب والمتعلمين">
+    <title>شركة سومر - أدوات أكاديمية ذكية</title>
+    <!-- فافيكون (لوغو الموقع) -->
+    <link rel="icon" type="image/png" href="https://iili.io/KREI5cF.md.png">
+
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-light: #f8fafc;
+            --primary-dark: #1e2a38;
+            --accent-color: #4fd1c5;
+            --accent-dark: #38b2ac;
+            --white: #ffffff;
+            --text-primary: #2d3748;
+            --text-secondary: #718096;
+            --border-color: #e2e8f0;
+            --background: #f8fafc;
+            --card-bg: #ffffff;
+            
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.05), 0 4px 6px rgba(0, 0, 0, 0.05);
+            
+            --radius-sm: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* شريط التنقل */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: var(--white);
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: var(--shadow-md);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            padding: 0.7rem 2rem;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: var(--shadow-lg);
+            border: 2px solid var(--accent-color);
+        }
+
+        .brand-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-link:hover {
+            color: var(--accent-color);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: width 0.3s;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* الأقسام الرئيسية */
+        .section {
+            min-height: 100vh;
+            padding: 6rem 2rem 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .section.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: var(--primary-dark);
+            position: relative;
+            padding-bottom: 1rem;
+            text-align: center;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent-color);
+        }
+
+        .section-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        /* قسم الرئيسية */
+        .hero {
+            text-align: center;
+            padding-top: 8rem;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-dark);
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: var(--accent-color);
+            animation: fadeInUp 1s ease 0.2s forwards;
+            opacity: 0;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            color: var(--text-secondary);
+            animation: fadeInUp 1s ease 0.4s forwards;
+            opacity: 0;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            padding: 1rem 2rem;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .cta-primary {
+            background-color: var(--accent-color);
+            color: var(--white);
+        }
+
+        .cta-primary:hover {
+            background-color: var(--accent-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .cta-secondary {
+            background-color: transparent;
+            color: var(--accent-color);
+            border: 2px solid var(--accent-color);
+        }
+
+        .cta-secondary:hover {
+            background-color: var(--accent-color);
+            color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* قسم من نحن */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            margin-top: 2rem;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+        }
+
+        .about-image {
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            height: 300px;
+            background: linear-gradient(45deg, var(--accent-color), var(--accent-dark));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        /* قسم ماذا نقدم */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background-color: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent-color);
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .service-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-dark);
+        }
+
+        .service-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* قسم أهدافنا */
+        .goals-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .goal-item {
+            background-color: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .goal-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .goal-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        .goal-text {
+            color: var(--text-secondary);
+        }
+
+        /* قسم مواقعنا */
+        .sites-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .site-card {
+            background-color: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .site-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent-color);
+        }
+
+        .site-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-dark);
+        }
+
+        .site-description {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .site-link {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background-color: var(--accent-color);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .site-link:hover {
+            background-color: var(--accent-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* قسم تواصل معنا */
+        .contact-form {
+            max-width: 600px;
+            margin: 3rem auto 0;
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            background-color: var(--background);
+            color: var(--text-primary);
+            font-family: 'Tajawal', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(79, 209, 197, 0.2);
+        }
+
+        textarea.form-input {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background-color: var(--accent-color);
+            color: var(--white);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: block;
+            width: 100%;
+            font-size: 1.1rem;
+        }
+
+        .submit-btn:hover {
+            background-color: var(--accent-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* التذييل */
+        footer {
+            background-color: var(--white);
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--accent-color);
+        }
+
+        .copyright {
+            color: var(--text-secondary);
+            margin-top: 2rem;
+        }
+
+        /* تأثيرات الحركة */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* التجاوب مع الشاشات الصغيرة */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: var(--white);
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: var(--shadow-md);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .section {
+                padding: 5rem 1rem 2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .hero-cta {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- شريط التنقل -->
+    <nav class="navbar">
+        <div class="logo-container">
+            <img src="https://iili.io/KREI5cF.md.png" alt="شعار شركة سومر" class="logo">
+            <div class="brand-name">سومر</div>
+        </div>
+        
+        <div class="nav-links">
+            <a href="#home" class="nav-link">الرئيسية</a>
+            <a href="#about" class="nav-link">من نحن</a>
+            <a href="#services" class="nav-link">ماذا نقدم</a>
+            <a href="#goals" class="nav-link">أهدافنا</a>
+            <a href="#sites" class="nav-link">منصاتنا</a>
+            <a href="#contact" class="nav-link">تواصل معنا</a>
+        </div>
+        
+        <button class="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+        </button>
+    </nav>
+
+    <!-- قسم الرئيسية -->
+    <section id="home" class="section active">
+        <div class="hero">
+            <h1 class="hero-title">شركة سومر</h1>
+            <h2 class="hero-subtitle">منصات وأدوات أكاديمية مبتكرة</h2>
+            <p class="hero-description">
+                نطور أدوات رقمية ذكية تساعد الطلاب والمعلمين على تحقيق أقصى استفادة من رحلتهم التعليمية. 
+                نحن نؤمن بأن التكنولوجيا يجب أن تكون في خدمة التعليم، ونسعى لجعل التعلم أكثر متعة وفعالية.
+            </p>
+            <div class="hero-cta">
+                <a href="#sites" class="cta-button cta-primary">
+                    <i class="fas fa-rocket"></i> استكشف منصاتنا
+                </a>
+                <a href="#contact" class="cta-button cta-secondary">
+                    <i class="fas fa-envelope"></i> تواصل معنا
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم من نحن -->
+    <section id="about" class="section">
+        <h2 class="section-title">من نحن</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>
+                    شركة سومر هي شركة تقنية ناشئة متخصصة في تطوير أدوات ومنصات تعليمية مبتكرة. انطلقت من العراق بهدف إحداث ثورة في مجال التعليم الرقمي وتقديم حلول تكنولوجية تلبي احتياجات الطلاب والمعلمين في العالم العربي والعالمي.
+                </p>
+                <p>
+                    نؤمن بأن التكنولوجيا يجب أن تكون بسيطة، مجانية، ومتاحة للجميع. لذلك نركز على تطوير أدوات تعمل بالكامل داخل المتصفح دون الحاجة إلى تثبيت برامج إضافية أو استخدام قواعد بيانات معقدة.
+                </p>
+                <p>
+                    يتميز فريقنا بالشغف للتعليم والتكنولوجيا، ونعمل باستمرار على تطوير حلول تجمع بين البساطة والقوة، لتجربة تعليمية أكثر فعالية ومتعة.
+                </p>
+            </div>
+            <div class="about-image">
+                مستقبل التعليم الرقمي
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم ماذا نقدم -->
+    <section id="services" class="section">
+        <h2 class="section-title">ماذا نقدم</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <h3 class="service-title">أدوات تعليمية ذكية</h3>
+                <p class="service-description">
+                    نطور أدوات تعليمية مبتكرة تساعد الطلاب على تنظيم وقتهم، إدارة مهامهم، وتحسين عملية التعلم. جميع أدواتنا مصممة خصيصًا لتلبية احتياجات الطلاب في مختلف المراحل التعليمية.
+                </p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-laptop-code"></i>
+                </div>
+                <h3 class="service-title">منصات تعليمية تفاعلية</h3>
+                <p class="service-description">
+                    نصمم منصات تعليمية تفاعلية تعمل بالكامل داخل المتصفح، لا تتطلب أي تثبيت أو إعدادات معقدة. تتميز منصاتنا بواجهات بسيطة وسهلة الاستخدام مع أداء عالي وسرعة فائقة.
+                </p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <h3 class="service-title">حلول تعلم مخصصة</h3>
+                <p class="service-description">
+                    نقدم حلول تعلم مخصصة تساعد على تحسين retention rate وتثبيت المعلومات عبر تقنيات التعلم المتباعد والاختبارات التكيفية. كل ذلك مصمم لتحقيق أقصى استفادة من وقت الدراسة.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم أهدافنا -->
+    <section id="goals" class="section">
+        <h2 class="section-title">أهدافنا</h2>
+        <div class="goals-container">
+            <div class="goal-item">
+                <div class="goal-number">01</div>
+                <p class="goal-text">تطوير أدوات تعليمية مجانية متاحة للطلاب في جميع أنحاء العالم</p>
+            </div>
+            
+            <div class="goal-item">
+                <div class="goal-number">02</div>
+                <p class="goal-text">تبسيط التكنولوجيا وجعلها في متناول الجميع دون حواجز تقنية</p>
+            </div>
+            
+            <div class="goal-item">
+                <div class="goal-number">03</div>
+                <p class="goal-text">تحسين تجربة التعلم وجعلها أكثر تفاعلية ومتعة وفعالية</p>
+            </div>
+            
+            <div class="goal-item">
+                <div class="goal-number">04</div>
+                <p class="goal-text">بناء مجتمع تعليمي يتبنى الابتكار والتطوير المستمر</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم مواقعنا -->
+    <section id="sites" class="section">
+        <h2 class="section-title">منصاتنا التعليمية</h2>
+        <div class="sites-container">
+            <div class="site-card">
+                <h3 class="site-title">أداة البومودورو وإدارة المهام</h3>
+                <p class="site-description">
+                    منصة متكاملة تساعد الطلاب على تنظيم وقت الدراسة باستخدام تقنية البومودورو، مع ميزات متقدمة لإدارة المهام وتتبع التقدم. تساعد هذه الأداة على زيادة الإنتاجية والتركيز أثناء فترات الدراسة.
+                </p>
+                <a href="https://a07725684792-source.github.io/somer.lr/#" class="site-link">استكشف الأداة</a>
+            </div>
+            
+            <div class="site-card">
+                <h3 class="site-title">منصة البطاقات التعليمية الذكية</h3>
+                <p class="site-description">
+                    منصة مبتكرة لإنشاء وإدارة البطاقات التعليمية باستخدام خوارزميات التعلم المتباعد. تساعد هذه المنصة على تحسين عملية استرجاع المعلومات وتثبيتها في الذاكرة طويلة المدى.
+                </p>
+                <a href="https://a07725684792-source.github.io/somer.ti/" class="site-link">استكشف المنصة</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم تواصل معنا -->
+    <section id="contact" class="section">
+        <h2 class="section-title">تواصل معنا</h2>
+        <form class="contact-form" id="contactForm">
+            <div class="form-group">
+                <label for="name" class="form-label">الاسم</label>
+                <input type="text" id="name" class="form-input" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email" class="form-label">البريد الإلكتروني</label>
+                <input type="email" id="email" class="form-input" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="message" class="form-label">الرسالة</label>
+                <textarea id="message" class="form-input" required></textarea>
+            </div>
+            
+            <button type="submit" class="submit-btn">
+                <i class="fas fa-paper-plane"></i> إرسال الرسالة
+            </button>
+        </form>
+    </section>
+
+    <!-- التذييل -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#home" class="footer-link">الرئيسية</a>
+                <a href="#about" class="footer-link">من نحن</a>
+                <a href="#services" class="footer-link">ماذا نقدم</a>
+                <a href="#goals" class="footer-link">أهدافنا</a>
+                <a href="#sites" class="footer-link">منصاتنا</a>
+                <a href="#contact" class="footer-link">تواصل معنا</a>
+            </div>
+            
+            <div class="copyright">
+                © 2025 شركة سومر – جميع الحقوق محفوظة
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // عناصر DOM
+            const navbar = document.querySelector('.navbar');
+            const navLinks = document.querySelector('.nav-links');
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const sections = document.querySelectorAll('.section');
+            const navItems = document.querySelectorAll('.nav-link');
+            const contactForm = document.getElementById('contactForm');
+            
+            // إعداد مستمعي الأحداث
+            setupEventListeners();
+            
+            // تهيئة التطبيق
+            init();
+            
+            function setupEventListeners() {
+                // تبديل القائمة على الشاشات الصغيرة
+                mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+                
+                // إغلاق القائمة عند النقر على رابط
+                navItems.forEach(item => {
+                    item.addEventListener('click', () => {
+                        if (navLinks.classList.contains('active')) {
+                            toggleMobileMenu();
+                        }
+                    });
+                });
+                
+                // تتبع التمرير لتغيير شريط التنقل
+                window.addEventListener('scroll', handleScroll);
+                
+                // إرسال نموذج التواصل
+                if (contactForm) {
+                    contactForm.addEventListener('submit', handleFormSubmit);
+                }
+            }
+            
+            function init() {
+                // تفعيل القسم الأول
+                setActiveSection();
+                
+                // إعداد مراقبة الأقسام عند التمرير
+                window.addEventListener('scroll', setActiveSection);
+            }
+            
+            function toggleMobileMenu() {
+                navLinks.classList.toggle('active');
+                
+                if (navLinks.classList.contains('active')) {
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-times"></i>';
+                } else {
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                }
+            }
+            
+            function handleScroll() {
+                // إضافة تأثير التمرير لشريط التنقل
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            }
+            
+            function setActiveSection() {
+                let currentSection = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.offsetHeight;
+                    
+                    if (window.scrollY >= sectionTop - 200 && 
+                        window.scrollY < sectionTop + sectionHeight - 200) {
+                        currentSection = section.getAttribute('id');
+                    }
+                });
+                
+                // إزالة النشاط من جميع الأقسام
+                sections.forEach(section => {
+                    section.classList.remove('active');
+                });
+                
+                // إضافة النشاط للقسم الحالي
+                if (currentSection) {
+                    document.getElementById(currentSection).classList.add('active');
+                    
+                    // تحديث رابط التنقل النشط
+                    navItems.forEach(item => {
+                        item.classList.remove('active');
+                        if (item.getAttribute('href') === `#${currentSection}`) {
+                            item.classList.add('active');
+                        }
+                    });
+                }
+            }
+            
+            function handleFormSubmit(e) {
+                e.preventDefault();
+                
+                // جمع بيانات النموذج
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const message = document.getElementById('message').value;
+                
+                // إرسال البريد الإلكتروني باستخدام EmailJS
+                emailjs.send("service_your_service_id", "template_your_template_id", {
+                    from_name: name,
+                    from_email: email,
+                    message: message,
+                    to_email: "a07725684792@gmail.com"
+                })
+                .then(function(response) {
+                    alert('شكرًا لتواصلك معنا! تم إرسال رسالتك بنجاح وسنرد عليك في أقرب وقت ممكن.');
+                    contactForm.reset();
+                }, function(error) {
+                    alert('عذرًا، حدث خطأ أثناء إرسال رسالتك. يرجى المحاولة مرة أخرى أو التواصل معنا مباشرة على a07725684792@gmail.com');
+                });
+            }
+            
+            // التمرير السلس عند النقر على روابط التنقل
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3.2.0/dist/email.min.js"></script>
+    <script>
+        // تهيئة EmailJS مع معرف المستخدم
+        (function(){
+            emailjs.init("your_user_id"); // استبدل your_user_id بمعرفك من EmailJS
+        })();
+    </script>
+</body>
+</html>
