@@ -409,70 +409,6 @@
             box-shadow: var(--shadow-md);
         }
 
-        /* قسم تواصل معنا */
-        .contact-form {
-            max-width: 600px;
-            margin: 3rem auto 0;
-            background-color: var(--card-bg);
-            padding: 2rem;
-            border-radius: var(--radius-lg);
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: var(--text-primary);
-            font-weight: 500;
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 1rem;
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-md);
-            background-color: var(--background);
-            color: var(--text-primary);
-            font-family: 'Tajawal', sans-serif;
-            transition: all 0.3s ease;
-        }
-
-        .form-input:focus {
-            outline: none;
-            border-color: var(--accent-color);
-            box-shadow: 0 0 0 3px rgba(79, 209, 197, 0.2);
-        }
-
-        textarea.form-input {
-            min-height: 150px;
-            resize: vertical;
-        }
-
-        .submit-btn {
-            background-color: var(--accent-color);
-            color: var(--white);
-            border: none;
-            padding: 1rem 2rem;
-            border-radius: var(--radius-md);
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            display: block;
-            width: 100%;
-            font-size: 1.1rem;
-        }
-
-        .submit-btn:hover {
-            background-color: var(--accent-dark);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
-        }
-
         /* التذييل */
         footer {
             background-color: var(--white);
@@ -589,7 +525,6 @@
             <a href="#services" class="nav-link">ماذا نقدم</a>
             <a href="#goals" class="nav-link">أهدافنا</a>
             <a href="#sites" class="nav-link">منصاتنا</a>
-            <a href="#contact" class="nav-link">تواصل معنا</a>
         </div>
         
         <button class="mobile-menu-btn">
@@ -609,9 +544,6 @@
             <div class="hero-cta">
                 <a href="#sites" class="cta-button cta-primary">
                     <i class="fas fa-rocket"></i> استكشف منصاتنا
-                </a>
-                <a href="#contact" class="cta-button cta-secondary">
-                    <i class="fas fa-envelope"></i> تواصل معنا
                 </a>
             </div>
         </div>
@@ -705,46 +637,29 @@
         <h2 class="section-title">منصاتنا التعليمية</h2>
         <div class="sites-container">
             <div class="site-card">
-                <h3 class="site-title">أداة البومودورو وإدارة المهام</h3>
-                <p class="site-description">
-                    منصة متكاملة تساعد الطلاب على تنظيم وقت الدراسة باستخدام تقنية البومودورو، مع ميزات متقدمة لإدارة المهام وتتبع التقدم. تساعد هذه الأداة على زيادة الإنتاجية والتركيز أثناء فترات الدراسة.
-                </p>
-                <a href="https://a07725684792-source.github.io/somer.lr/#" class="site-link">استكشف الأداة</a>
-            </div>
-            
-            <div class="site-card">
                 <h3 class="site-title">منصة البطاقات التعليمية الذكية</h3>
                 <p class="site-description">
                     منصة مبتكرة لإنشاء وإدارة البطاقات التعليمية باستخدام خوارزميات التعلم المتباعد. تساعد هذه المنصة على تحسين عملية استرجاع المعلومات وتثبيتها في الذاكرة طويلة المدى.
                 </p>
                 <a href="https://a07725684792-source.github.io/somer.ti/" class="site-link">استكشف المنصة</a>
             </div>
+            
+            <div class="site-card">
+                <h3 class="site-title">أداة البومودورو وإدارة المهام</h3>
+                <p class="site-description">
+                    منصة متكاملة تساعد الطلاب على تنظيم وقت الدراسة باستخدام تقنية البومودورو، مع ميزات متقدمة لإدارة المهام وتتبع التقدم. تساعد هذه الأداة على زيادة الإنتاجية والتركيز أثناء فترات الدراسة.
+                </p>
+                <a href="https://a07725684792-source.github.io/somer.ti/" class="site-link">استكشف الأداة</a>
+            </div>
+            
+            <div class="site-card">
+                <h3 class="site-title">الآلة الحاسبة الذكية</h3>
+                <p class="site-description">
+                    أداة حاسبة متطورة مصممة خصيصاً للطلاب، تحتوي على وظائف متقدمة لحل المعادلات الرياضية والعمليات الحسابية المعقدة، مع واجهة سهلة الاستخدام.
+                </p>
+                <a href="https://a07725684792-source.github.io/somer.calc/" class="site-link">استكشف الأداة</a>
+            </div>
         </div>
-    </section>
-
-    <!-- قسم تواصل معنا -->
-    <section id="contact" class="section">
-        <h2 class="section-title">تواصل معنا</h2>
-        <form class="contact-form" id="contactForm">
-            <div class="form-group">
-                <label for="name" class="form-label">الاسم</label>
-                <input type="text" id="name" class="form-input" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="email" class="form-label">البريد الإلكتروني</label>
-                <input type="email" id="email" class="form-input" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="message" class="form-label">الرسالة</label>
-                <textarea id="message" class="form-input" required></textarea>
-            </div>
-            
-            <button type="submit" class="submit-btn">
-                <i class="fas fa-paper-plane"></i> إرسال الرسالة
-            </button>
-        </form>
     </section>
 
     <!-- التذييل -->
@@ -756,7 +671,6 @@
                 <a href="#services" class="footer-link">ماذا نقدم</a>
                 <a href="#goals" class="footer-link">أهدافنا</a>
                 <a href="#sites" class="footer-link">منصاتنا</a>
-                <a href="#contact" class="footer-link">تواصل معنا</a>
             </div>
             
             <div class="copyright">
@@ -773,7 +687,6 @@
             const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
             const sections = document.querySelectorAll('.section');
             const navItems = document.querySelectorAll('.nav-link');
-            const contactForm = document.getElementById('contactForm');
             
             // إعداد مستمعي الأحداث
             setupEventListeners();
@@ -796,11 +709,6 @@
                 
                 // تتبع التمرير لتغيير شريط التنقل
                 window.addEventListener('scroll', handleScroll);
-                
-                // إرسال نموذج التواصل
-                if (contactForm) {
-                    contactForm.addEventListener('submit', handleFormSubmit);
-                }
             }
             
             function init() {
@@ -862,29 +770,6 @@
                 }
             }
             
-            function handleFormSubmit(e) {
-                e.preventDefault();
-                
-                // جمع بيانات النموذج
-                const name = document.getElementById('name').value;
-                const email = document.getElementById('email').value;
-                const message = document.getElementById('message').value;
-                
-                // إرسال البريد الإلكتروني باستخدام EmailJS
-                emailjs.send("service_your_service_id", "template_your_template_id", {
-                    from_name: name,
-                    from_email: email,
-                    message: message,
-                    to_email: "a07725684792@gmail.com"
-                })
-                .then(function(response) {
-                    alert('شكرًا لتواصلك معنا! تم إرسال رسالتك بنجاح وسنرد عليك في أقرب وقت ممكن.');
-                    contactForm.reset();
-                }, function(error) {
-                    alert('عذرًا، حدث خطأ أثناء إرسال رسالتك. يرجى المحاولة مرة أخرى أو التواصل معنا مباشرة على a07725684792@gmail.com');
-                });
-            }
-            
             // التمرير السلس عند النقر على روابط التنقل
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
@@ -903,14 +788,6 @@
                 });
             });
         });
-    </script>
-    <!-- EmailJS SDK -->
-    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3.2.0/dist/email.min.js"></script>
-    <script>
-        // تهيئة EmailJS مع معرف المستخدم
-        (function(){
-            emailjs.init("your_user_id"); // استبدل your_user_id بمعرفك من EmailJS
-        })();
     </script>
 </body>
 </html>
